@@ -1,0 +1,6 @@
+Flask
+PyMySQL
+ultralytics
+torch
+opencv-python
+watchdog

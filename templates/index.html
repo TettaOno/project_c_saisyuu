@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>病害虫検出システム</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* 簡単なスタイリング例 */
+        #video-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #webcam-video {
+            width: 640px;
+            height: 480px;
+            background-color: #333;
+            border: 1px solid #ccc;
+            display: none; /* リアルタイム映像を非表示にする */
+        }
+        #capture-canvas {
+            display: none; /* キャプチャ用キャンバスは非表示 */
+        }
+        #captured-image {
+            max-width: 640px;
+            max-height: 480px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            display: none; /* 初期状態では非表示 */
+        }
+        #controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* #result { // 推論結果表示欄は削除
+            margin-top: 30px;
+            border: 1px solid #eee;
+            padding: 15px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+        } */
+    </style>
+</head>
+<body>
+    <h1>病害虫検出システム</h1>
+
+    <div id="video-container">
+        <video id="webcam-video" autoplay playsinline></video>
+    </div>
+
+    <canvas id="capture-canvas"></canvas>
+
+    <!-- 写真撮影ボタンとプレビュー画面を削除 -->
+    <!-- <div id="controls">
+        <button id="capture-button">写真撮影</button>
+    </div> -->
+
+    <!-- <div id="image-preview">
+        <h3>キャプチャした画像プレビュー:</h3>
+        <img id="captured-image" alt="キャプチャ画像">
+    </div> -->
+
+    <!-- 推論結果表示欄を削除 -->
+    <!-- <div id="result">
+        <h3>推論結果:</h3>
+        <p>ここに結果が表示されます。</p>
+    </div> -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

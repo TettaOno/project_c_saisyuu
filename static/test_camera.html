@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>簡易カメラテスト</title>
+</head>
+<body>
+    <h1>簡易カメラテスト</h1>
+    <video id="test-video" width="640" height="480" autoplay playsinline></video>
+    <script>
+        const video = document.getElementById('test-video');
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+                console.log('カメラ起動成功！');
+            })
+            .catch(error => {
+                console.error('カメラ起動失敗:', error);
+            });
+    </script>
+</body>
+</html>

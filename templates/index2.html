@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>トマト病気判別システム</title>
+    <style>
+        body { 
+            font-family: 'Inter', Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: auto; 
+            padding: 30px; 
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #d9534f; /* トマトっぽい赤 */
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        /* 画像とCanvasを重ねるためのコンテナ設定 */
+        .image-container { 
+            position: relative; 
+            max-width: 100%; 
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden; /* 角丸対応 */
+        }
+        
+        /* 画像とCanvasの基本スタイル */
+        #preview { 
+            max-width: 100%; 
+            height: auto; 
+            display: none;
+            border-radius: 8px;
+        }
+        /* Canvasを画像の上にぴったり重ねる */
+        #detectionCanvas { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            display: none; 
+            pointer-events: none; /* マウスイベントを透過させる */
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        #detectButton {
+            padding: 10px 20px;
+            background-color: #5cb85c; /* 緑のボタン */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #detectButton:not([disabled]):hover {
+            background-color: #4cae4c;
+        }
+        #detectButton[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .result-box { 
+            margin-top: 20px; 
+            padding: 15px; 
+            border: 1px solid #007bff; 
+            border-radius: 8px;
+            background-color: #eaf6ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍅 トマト病気判別システム</h1>
+        
+        <div class="controls">
+            <!-- onchange, onclick イベントで main.js から公開された関数を呼び出す -->
+            <input type="file" id="tomatoImage" accept="image/*" onchange="previewFile()">
+            <button id="detectButton" onclick="uploadImage()" disabled>病気判定を実行</button>
+        </div>
+        
+        <h2>プレビューと検出結果</h2>
+        
+        <!-- 画像とCanvasを重ねるコンテナ -->
+        <div class="image-container">
+            <img id="preview" src="" alt="選択された画像">
+            <!-- 検出枠を描画するためのCanvas -->
+            <canvas id="detectionCanvas"></canvas>
+        </div>
+        
+        <h2>判定結果詳細</h2>
+        <!-- 判定結果（テキスト）を表示する領域 -->
+        <div id="result" class="result-box">
+            ここに判定結果（病名、確信度、DBステータスなど）が表示されます。
+        </div>
+    </div>
+
+<!-- ★ モジュール形式でmain.jsを読み込む (最も重要) ★ -->
+<!-- Flaskのurl_forを使って正しい静的ファイルパスを取得 -->
+<script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
